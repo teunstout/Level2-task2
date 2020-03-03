@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         rvQuestions.layoutManager = StaggeredGridLayoutManager(1,1)
         rvQuestions.adapter = questionAdapter
-        rvQuestions.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.HORIZONTAL))
+        rvQuestions.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
     }
 
 }
