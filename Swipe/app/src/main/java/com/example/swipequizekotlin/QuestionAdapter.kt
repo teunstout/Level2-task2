@@ -3,6 +3,7 @@ package com.example.swipequizekotlin
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.question_layout.view.*
@@ -12,6 +13,7 @@ class QuestionAdapter(val questions: ArrayList<Question>): RecyclerView.Adapter<
     inner class ViewHolder(textview : View): RecyclerView.ViewHolder(textview){
         fun bind(question: Question){
             itemView.question.text = question.QuizQuestion
+
         }
     }
 

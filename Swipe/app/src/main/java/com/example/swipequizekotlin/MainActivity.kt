@@ -16,9 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in Question.QUESTIONS_FOR_QUIZE.indices) {
             questions.add(Question(Question.QUESTIONS_FOR_QUIZE[i], Question.QUESTION_AWNSERS_FOR_QUIZE[i]))
-
         }
-        questionAdapter.notifyDataSetChanged()
         initViews()
     }
 
