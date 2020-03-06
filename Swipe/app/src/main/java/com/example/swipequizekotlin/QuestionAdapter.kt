@@ -11,9 +11,13 @@ import kotlinx.android.synthetic.main.question_layout.view.*
 class QuestionAdapter(val questions: ArrayList<Question>): RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
     inner class ViewHolder(textview : View): RecyclerView.ViewHolder(textview){
-        fun bind(question: Question){
-            itemView.question.text = question.QuizQuestion
 
+        fun bind(question: Question){
+            itemView.question.text = question.quizQuestion
+
+            itemView.setOnClickListener {
+
+            }
         }
     }
 

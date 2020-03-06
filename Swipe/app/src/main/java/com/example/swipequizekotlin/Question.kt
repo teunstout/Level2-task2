@@ -1,18 +1,22 @@
 package com.example.swipequizekotlin
 
+/**
+ * Dataclass. Voor het displayen van data
+ * Comnpion object is gewoon een statisch object met de data
+ */
 data class Question(
-    val QuizQuestion: String,
-    val Questionawnser: Boolean
+    val quizQuestion: String,
+    val questionAwnser: Boolean
 ) {
     companion object {
         val QUESTIONS_FOR_QUIZE = arrayOf(
-            "A 'val' and 'var' are the same.",
+            "Web development is better than mobile development",
             "Mobile Application Development grants 12 ETCS",
             "A unit in kotlin corresponds to a void in Java",
             "In kotlin 'when' replaces the 'switch' operator in Java"
         )
         val QUESTION_AWNSERS_FOR_QUIZE = arrayOf(
-            false,
+            true,
             true,
             false,
             true
