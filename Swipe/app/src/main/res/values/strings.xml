@@ -5,4 +5,5 @@
     <string name="NoQuizeFound">No quize found</string>
     <string name="incorrectAwnser">Correct</string>
     <string name="correctAwnser">Awnser is not correct</string>
+    <string name="awnser">The awnser is %b</string>
 </resources>

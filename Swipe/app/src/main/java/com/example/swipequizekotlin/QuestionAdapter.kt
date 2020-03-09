@@ -3,20 +3,23 @@ package com.example.swipequizekotlin
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-
 import kotlinx.android.synthetic.main.question_layout.view.*
 
-class QuestionAdapter(val questions: ArrayList<Question>): RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
+class QuestionAdapter(val questions: ArrayList<Question>) :
+    RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
-    inner class ViewHolder(textview : View): RecyclerView.ViewHolder(textview){
+    inner class ViewHolder(textview: View) : RecyclerView.ViewHolder(textview) {
 
-        fun bind(question: Question){
+        fun bind(question: Question) {
             itemView.question.text = question.quizQuestion
-
             itemView.setOnClickListener {
-
+                Toast.makeText(
+                    itemView.context,
+                    itemView.context.getString(R.string.awnser, question.questionAwnser),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -34,4 +37,5 @@ class QuestionAdapter(val questions: ArrayList<Question>): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(questions[position])
     }
+
 }
