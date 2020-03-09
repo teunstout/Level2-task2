@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -62,15 +63,21 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val swipeDirection = direction == ItemTouchHelper.RIGHT
-
+                var awnserSwipe = ""
+                
                 if (swipeDirection == questions[position].questionAwnser) {
                     questions.removeAt(position)
-                    // snackbar
                     questionAdapter.notifyDataSetChanged()
+                    awnserSwipe = viewHolder.itemView.context.getString(R.string.correctAwnser)
                 } else {
-                    // snackbar wrong
                     questionAdapter.notifyItemChanged(position)
+                    awnserSwipe = viewHolder.itemView.context.getString(R.string.incorrectAwnser)
                 }
+                Snackbar.make(
+                    viewHolder.itemView,
+                    awnserSwipe,
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
         return ItemTouchHelper(callback)

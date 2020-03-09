@@ -14,6 +14,7 @@ class QuestionAdapter(val questions: ArrayList<Question>) :
 
         fun bind(question: Question) {
             itemView.question.text = question.quizQuestion
+            // https://stackoverflow.com/questions/52765121/how-do-i-call-getstring-inside-the-onbindviewholder-method-of-a-recycler-vie
             itemView.setOnClickListener {
                 Toast.makeText(
                     itemView.context,
