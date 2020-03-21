@@ -10,31 +10,23 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    val questions = arrayListOf<Question>() // arraylist of dataclass question
-    val questionAdapter =
-        QuestionAdapter(questions)    // question adapter geef je alle data objects
+    private val questions = arrayListOf<Question>()
+    private val questionAdapter = QuestionAdapter(questions)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // voor elk companion object een nieuwe dataclass aanmaken
-        for (i in Question.QUESTIONS_FOR_QUIZE.indices) {
-            questions.add(
-                Question(
-                    Question.QUESTIONS_FOR_QUIZE[i],
-                    Question.QUESTION_AWNSERS_FOR_QUIZE[i]
-                )
-            )
-        }
+        questions.add(Question("Web development is better than mobile development", true))
+        questions.add(Question("Mobile Application Development grants 12 ETCS", true))
+        questions.add(Question("A unit in kotlin corresponds to a void in Java", false))
+        questions.add(Question("In kotlin 'when' replaces the 'switch' operator in Java", true))
 
         initViews()
     }
 
     private fun initViews() {
-        rvQuestions.layoutManager = StaggeredGridLayoutManager(1, 1) // gebruik een staggerd grid
-        rvQuestions.adapter = questionAdapter // adapter recycle view is questionadapter
-        // scheid de lijntjes doormiddel van een verticale lijn
+        rvQuestions.layoutManager = StaggeredGridLayoutManager(1, 1)
+        rvQuestions.adapter = questionAdapter
         rvQuestions.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         createItemTouchHelper().attachToRecyclerView(rvQuestions)
     }
@@ -46,8 +38,6 @@ class MainActivity : AppCompatActivity() {
      * and uses callbacks to signal when a user is performing these actions.
      */
     private fun createItemTouchHelper(): ItemTouchHelper {
-        // Callback which is used to create the ItemTouch helper. Only enables left swipe.
-        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
         val callback = object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
@@ -63,24 +53,18 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val swipeDirection = direction == ItemTouchHelper.RIGHT
-                var awnserSwipe = ""
-                
-                if (swipeDirection == questions[position].questionAwnser) {
+                val answerSwipe = if (swipeDirection == questions[position].questionAwnser) {
                     questions.removeAt(position)
                     questionAdapter.notifyDataSetChanged()
-                    awnserSwipe = viewHolder.itemView.context.getString(R.string.correctAwnser)
+                    viewHolder.itemView.context.getString(R.string.correctAwnser)
                 } else {
                     questionAdapter.notifyItemChanged(position)
-                    awnserSwipe = viewHolder.itemView.context.getString(R.string.incorrectAwnser)
+                    viewHolder.itemView.context.getString(R.string.incorrectAwnser)
                 }
-                Snackbar.make(
-                    viewHolder.itemView,
-                    awnserSwipe,
-                    Snackbar.LENGTH_SHORT
-                ).show()
+
+                Snackbar.make(viewHolder.itemView, answerSwipe, Snackbar.LENGTH_SHORT).show()
             }
         }
         return ItemTouchHelper(callback)
     }
-
 }
